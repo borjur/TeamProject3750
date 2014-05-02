@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>LocationDropdownServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.LocationDropdownServlet</servlet-class>
+    </servlet>
+    <!-- added by angela 2-11-14 -->
+     <servlet>
+        <servlet-name>LocationServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.locations.LocationServlet</servlet-class>
+    </servlet>
+    <!-- added by Jon 2-27-14 -->
+    <servlet> 
+        <servlet-name>AssetServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.assets.AssetServlet</servlet-class>
+    </servlet>
+    
+    <!--
+     <servlet>
+         <servlet-name>Reports</servlet-name>
+             <servlet-class>Reports</servlet-class>
+    </servlet>
+    -->
+    <servlet>
+        <servlet-name>QueryServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.QueryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearSessionServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.ClearSessionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReassignServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.ReassignServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.groups.GroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupQueryServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.groups.GroupQueryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LocationDropdownServlet</servlet-name>
+        <url-pattern>/LocationDropdownServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- added by angela -->
+    <servlet-mapping>
+        <servlet-name>LocationServlet</servlet-name>
+        <url-pattern>/LocationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryServlet</servlet-name>
+        <url-pattern>/QueryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearSessionServlet</servlet-name>
+        <url-pattern>/ClearSessionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReassignServlet</servlet-name>
+        <url-pattern>/ReassignServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupServlet</servlet-name>
+        <url-pattern>/GroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupQueryServlet</servlet-name>
+        <url-pattern>/GroupQueryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssetServlet</servlet-name>
+        <url-pattern>/AssetServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

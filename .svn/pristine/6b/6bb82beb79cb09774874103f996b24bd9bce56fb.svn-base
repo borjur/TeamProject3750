@@ -1,0 +1,61 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ * 
+ * @ Author Boris
+ */
+package org.fancygiraffe.global;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+//
+public class TestingMain {
+
+	private static final String USERNAME = "Weber";
+	private static final String PASSWORD = "weber";
+	private static final String CONN_STRING =
+			"jdbc:sqlserver://petunia.arvixe.com;databaseName=WeberInventory;selectMethod=cursor";
+	
+	public static void main(String[] args) throws SQLException {
+		
+
+
+		try (           // connects to the database
+				Connection conn = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+                                //asks you what kind of Result set(retrieves data from DB) do you want to have, we want scollable and read only
+				Statement stmt = conn.createStatement(
+						ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+				ResultSet rs = stmt.executeQuery("SELECT * FROM assets ");	
+				) {
+                        //results set that scrolls to the last row
+			rs.last();
+                        //results set that prints rows
+			System.out.println("Number of rows: " + rs.getRow());
+                        
+                        
+                        //----- scrollable way to retrive data -----
+                        
+                        Tables.displayData(rs);
+
+			rs.last();
+			System.out.println("Number of rows: " + rs.getRow());
+
+			rs.first();                                  // columns names of assets table ?
+			System.out.println("The first asset is " + rs.getString("asset_name"));
+
+			rs.last();                            
+			System.out.println("The last asset is " + rs.getString("asset_name"));
+
+			rs.absolute(10);
+			System.out.println("The 10th asset is " + rs.getString("asset_name"));
+
+		} catch (SQLException e) {
+			DBUtil.processException(e);
+		} 
+
+	}
+}

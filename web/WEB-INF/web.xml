@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+<servlet>
+		<servlet-name>DemoAction</servlet-name>
+		<servlet-class>com.DemoAction</servlet-class>
+	</servlet> 
+	
+	<servlet-mapping>
+		<servlet-name>DemoAction</servlet-name>
+		<url-pattern>/com/DemoAction.java</url-pattern>
+	</servlet-mapping> 
+	
+	<servlet>
+		<servlet-name>TableDemoAction</servlet-name>
+		<servlet-class>com.TableDemoAction</servlet-class>
+	</servlet> 
+	
+	<servlet-mapping>
+		<servlet-name>TableDemoAction</servlet-name>
+		<url-pattern>/com/TableDemoAction.java</url-pattern>
+	</servlet-mapping>  
+	
+	<servlet>
+		<servlet-name>DatatableDemoAction</servlet-name>
+		<servlet-class>com.DatatableDemoAction</servlet-class>
+	</servlet> 
+	
+	<servlet-mapping>
+		<servlet-name>DatatableDemoAction</servlet-name>
+		<url-pattern>/com/DatatableDemoAction.java</url-pattern>
+	</servlet-mapping>  
+		
+	<error-page>
+		<error-code>404</error-code>
+		<location>/page-not-found.jsp</location>
+	</error-page>
+
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>*.jsp</url-pattern>
+			<el-ignored>false</el-ignored>
+			<scripting-invalid>false</scripting-invalid>
+		</jsp-property-group>
+	</jsp-config>
+	
+    
+      <context-param>
+    <param-name>dbuserid</param-name>
+    <param-value>Weber</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbuserpwd</param-name>
+    <param-value>weber</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbinitcat</param-name>
+    <param-value>world</param-value>
+  </context-param>
+    
+    
+    <servlet>
+        <servlet-name>LocationDropdownServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.LocationDropdownServlet</servlet-class>
+    </servlet>
+    <!-- added by angela 2-11-14 -->
+     <servlet>
+        <servlet-name>LocationServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.locations.LocationServlet</servlet-class>
+    </servlet>
+    <!-- added by Jon 2-27-14 -->
+    <servlet> 
+        <servlet-name>AssetServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.assets.AssetServlet</servlet-class>
+    </servlet>
+    
+ 
+    <servlet>
+        <servlet-name>QueryServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.QueryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClearSessionServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.ClearSessionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReassignServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.relocate.ReassignServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.groups.GroupServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GroupQueryServlet</servlet-name>
+        <servlet-class>org.fancygiraffe.groups.GroupQueryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LocationDropdownServlet</servlet-name>
+        <url-pattern>/LocationDropdownServlet</url-pattern>
+    </servlet-mapping>
+    
+    <!-- added by angela -->
+    <servlet-mapping>
+        <servlet-name>LocationServlet</servlet-name>
+        <url-pattern>/LocationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryServlet</servlet-name>
+        <url-pattern>/QueryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClearSessionServlet</servlet-name>
+        <url-pattern>/ClearSessionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReassignServlet</servlet-name>
+        <url-pattern>/ReassignServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupServlet</servlet-name>
+        <url-pattern>/GroupServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupQueryServlet</servlet-name>
+        <url-pattern>/GroupQueryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssetServlet</servlet-name>
+        <url-pattern>/AssetServlet</url-pattern>
+    </servlet-mapping>
+
+
+  <servlet>
+    <description></description>
+    <display-name>ReportsServlet</display-name>
+    <servlet-name>ReportsServlet</servlet-name>
+    <servlet-class>org.fancygiraffe.reports.ReportsServlet</servlet-class>
+  </servlet>
+  
+    <servlet-mapping>
+        <servlet-name>ReportsServlet</servlet-name>
+        <url-pattern>/ReportsServlet</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+</web-app>

@@ -1,0 +1,131 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.fancygiraffe.reports;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.CachedRowSet;
+import org.fancygiraffe.models.*;
+
+/**
+ *
+ * @author Crackitybones
+ */
+@WebServlet(name = "ReportsServlet", urlPatterns = {"/reports"})
+public class ReportsServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher view = request.getRequestDispatcher("reports.jsp");
+        view.forward(request, response);
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP
+     * <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        //Get list of locations by name
+        AssetsModel am = new AssetsModel();
+        LocationModel lm = new LocationModel();
+        
+        CachedRowSet assets = am.getAllAssets();
+        CachedRowSet assetTypes = am.getAssetsTypes();
+        CachedRowSet locations = lm.getUniqueLocations();
+        
+        request.setAttribute("assets", assets);
+        request.setAttribute("assetTypes", assetTypes);
+        request.setAttribute("locations", locations);
+        
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        AssetsModel am = new AssetsModel();
+        LocationModel lm = new LocationModel();
+        
+        CachedRowSet assetTypes = am.getAssetsTypes();
+        CachedRowSet locations = lm.getUniqueLocations();
+        
+        request.setAttribute("assetTypes", assetTypes);
+        request.setAttribute("locations", locations);
+        
+        String assetSearch = "" + request.getParameter("asset_search");
+        String location = "" + request.getParameter("location");
+        String type = "" + request.getParameter("type");
+
+        //PrintWriter out = response.getWriter();
+        
+        if ( !assetSearch.equals("") ) {
+            CachedRowSet crs = am.getAssetsById(assetSearch);
+            request.setAttribute("assets", crs);
+            
+        } else if ( !location.equals("") && !type.equals("") ) {
+            CachedRowSet crs = am.getAssetsByLocationAndType(location, type);
+            request.setAttribute("assets", crs);
+            
+        } else if ( !location.equals("") ) {
+            
+            CachedRowSet crs = am.getAssetsByLocation(location);
+            request.setAttribute("assets", crs);
+        } else if ( !type.equals("") ) {
+            
+            CachedRowSet crs = am.getAssetsByType(type);
+            request.setAttribute("assets", crs);
+            
+        }
+
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+}
